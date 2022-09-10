@@ -48,10 +48,13 @@ class AlbumsService {
 
     const albums = albumResult.rows.map(mapDBAlbumToModel)[0];
 
-    const results = {
-      ...albums,
-      songs: songsResult.rows.map(mapDBSongToModel),
-    };
+    const results =
+      songsResult.rows.length > 0
+        ? {
+            ...albums,
+            songs: songsResult.rows.map(mapDBSongToModel),
+          }
+        : albums;
 
     return results;
   }
