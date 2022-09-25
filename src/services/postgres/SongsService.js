@@ -10,7 +10,7 @@ class SongsService {
   }
 
   async addSong({ title, year, genre, performer, duration, albumId }) {
-    const id = "song-".concat(nanoid(16));
+    const id = `song-${nanoid(16)}`;
     const createdAt = new Date().toISOString();
 
     const query = {
@@ -107,6 +107,17 @@ class SongsService {
 
     if (!result.rows.length) {
       throw new NotFoundError("Song gagal dihapus. Id tidak ditemukan");
+    }
+  }
+
+  async checkSongExists(songId) {
+    const query = {
+      text: "SELECT 1 FROM songs WHERE id = $1",
+      values: [songId],
+    };
+    const result = await this._pool.query(query);
+    if (!result.rows.length) {
+      throw new NotFoundError("Song tidak ditemukan");
     }
   }
 }
