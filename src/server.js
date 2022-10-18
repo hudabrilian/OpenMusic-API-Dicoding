@@ -50,6 +50,7 @@ const UploadsValidator = require("./validator/uploads");
 const CacheService = require("./services/redis/CacheService");
 
 const ClientError = require("./exceptions/ClientError");
+const config = require("./utils/config");
 
 const init = async () => {
   const cacheService = new CacheService();
@@ -64,8 +65,8 @@ const init = async () => {
   );
 
   const server = Hapi.server({
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: config.app.port,
+    host: config.app.host,
     routes: {
       cors: {
         origin: ["*"],

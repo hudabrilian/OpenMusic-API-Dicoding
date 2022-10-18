@@ -1,9 +1,11 @@
+const config = require("./config");
+
 const mapDBAlbumToModel = ({ id, name, year, cover }) => ({
   id,
   name,
   year,
   coverUrl: cover
-    ? `http://${process.env.HOST}:${process.env.PORT}/upload/albums/${cover}`
+    ? `http://${config.app.host}:${config.app.port}/upload/albums/${cover}`
     : null,
 });
 
