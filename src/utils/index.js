@@ -1,7 +1,10 @@
-const mapDBAlbumToModel = ({ id, name, year }) => ({
+const mapDBAlbumToModel = ({ id, name, year, cover }) => ({
   id,
   name,
   year,
+  coverUrl: cover
+    ? `http://${process.env.HOST}:${process.env.PORT}/upload/albums/${cover}`
+    : null,
 });
 
 const mapDBSongToModel = ({
